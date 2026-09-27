@@ -14,12 +14,21 @@ class ExtractionService:
         items, unmatched = self._extract_services(text)
         notes = self._extract_notes(text)
 
+        # Extract discount from notes
+        discount = 0.0
+        if notes and "discount" in notes.lower():
+            discount_pattern = r'(\d+)%'
+            discount_match = re.search(discount_pattern, notes)
+            if discount_match:
+                discount = float(discount_match.group(1))
+
         return ExtractResponseSchema(
             customer=customer,
             items=items,
             notes=notes,
             extraction_source="Smart local extraction",
-            unmatched_services=unmatched
+            unmatched_services=unmatched,
+            discount=discount
         )
 
     def _extract_customer(self, text: str) -> CustomerSchema:
@@ -179,14 +188,16 @@ class ExtractionService:
 
     def _extract_notes(self, text: str) -> Optional[str]:
         """Extract notes or special instructions from text."""
+        notes = []
+
         # Look for discount mentions
         discount_pattern = r'(?:discount|off)\s*(\d+)%'
         discount_match = re.search(discount_pattern, text, re.IGNORECASE)
         if discount_match:
-            return f"Apply {discount_match.group(1)}% discount"
+            notes.append(f"Apply {discount_match.group(1)}% discount")
 
         # Look for urgency notes
         if re.search(r'\b(urgent|asap|immediately)\b', text, re.IGNORECASE):
-            return "Urgent request"
+            notes.append("Urgent request")
 
-        return None
+        return ' '.join(notes) if notes else None

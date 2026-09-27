@@ -84,6 +84,7 @@ class ExtractResponseSchema(BaseModel):
     notes: Optional[str] = None
     extraction_source: str
     unmatched_services: List[str] = Field(default_factory=list)
+    discount: float = 0.0
 
 
 class ServiceSchema(BaseModel):
