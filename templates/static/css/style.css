@@ -1,0 +1,335 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.navbar {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-brand h1 {
+    color: #667eea;
+    font-size: 24px;
+}
+
+.nav-subtitle {
+    color: #666;
+    font-size: 14px;
+}
+
+.nav-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: #667eea;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #5568d3;
+}
+
+.btn-secondary {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background: #e0e0e0;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 2px solid #667eea;
+    color: #667eea;
+}
+
+.btn-outline:hover {
+    background: #667eea;
+    color: white;
+}
+
+.btn-large {
+    padding: 15px 30px;
+    font-size: 16px;
+}
+
+.btn-small {
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+.main-content {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.view {
+    display: none;
+}
+
+.view.active {
+    display: block;
+}
+
+.hero {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero h2 {
+    color: #333;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #666;
+    font-size: 16px;
+}
+
+.process-steps {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.step {
+    background: #f8f9fa;
+    border: 2px solid #667eea;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.step-number {
+    font-size: 18px;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.step-label {
+    font-size: 10px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.step-arrow {
+    font-size: 24px;
+    color: #667eea;
+}
+
+.input-card {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.input-card h3 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#customerRequest {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    resize: vertical;
+}
+
+.example-prompts {
+    margin-top: 20px;
+}
+
+.example-label {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.prompt-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.card-header h3 {
+    color: #333;
+}
+
+.badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.badge-info {
+    background: #17a2b8;
+    color: white;
+}
+
+.badge-warning {
+    background: #ffc107;
+    color: #333;
+}
+
+.badge-success {
+    background: #28a745;
+    color: white;
+}
+
+.extraction-section {
+    margin-bottom: 20px;
+}
+
+.extraction-section h4 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.extraction-field {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.extraction-field label {
+    width: 100px;
+    color: #666;
+    font-weight: bold;
+}
+
+.extraction-field span {
+    color: #333;
+}
+
+.extraction-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.warning {
+    color: #dc3545;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.form-input-small {
+    width: 100px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.review-section {
+    margin-bottom: 20px;
+}
+
+.review-section h4 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.review-field {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.review-field label {
+    width: 100px;
+    color: #666;
+    font-weight: bold;
+}
+
+.review-totals {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.total-row:last-child {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.review-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
