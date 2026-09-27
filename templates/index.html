@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InvoiceAI - Smart Invoice Automation</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>InvoiceAI</h1>
+                <span class="nav-subtitle">Smart Invoice Automation</span>
+            </div>
+            <div class="nav-actions">
+                <button class="btn btn-secondary" id="historyBtn">History</button>
+                <button class="btn btn-primary" id="newInvoiceBtn">New Invoice</button>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <div id="landingView" class="view active">
+                <div class="hero">
+                    <h2>From customer message to professional invoice.</h2>
+                    <p>Extract requirements, match services, calculate pricing, and generate a review-ready invoice automatically.</p>
+                </div>
+
+                <div class="process-steps">
+                    <div class="step" data-step="1">
+                        <span class="step-number">01</span>
+                        <span class="step-label">Understand</span>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step" data-step="2">
+                        <span class="step-number">02</span>
+                        <span class="step-label">Match Services</span>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step" data-step="3">
+                        <span class="step-number">03</span>
+                        <span class="step-label">Calculate</span>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step" data-step="4">
+                        <span class="step-number">04</span>
+                        <span class="step-label">Review</span>
+                    </div>
+                    <div class="step-arrow">→</div>
+                    <div class="step" data-step="5">
+                        <span class="step-number">05</span>
+                        <span class="step-label">Approve</span>
+                    </div>
+                </div>
+
+                <div class="input-card">
+                    <h3>Describe what your customer needs...</h3>
+                    <textarea id="customerRequest" placeholder="Create an invoice for Rahul Sharma, rahul@example.com. He needs 2 website design packages and 1 logo design. Apply 10% discount." rows="4"></textarea>
+                    <button class="btn btn-primary btn-large" id="generateBtn">
+                        <span class="btn-text">Generate Invoice</span>
+                        <span class="btn-loader" style="display: none;">Generating...</span>
+                    </button>
+
+                    <div class="example-prompts">
+                        <p class="example-label">Try these examples:</p>
+                        <div class="prompt-buttons">
+                            <button class="btn btn-outline btn-small example-prompt">
+                                "Create an invoice for Ananya Rao, ananya@example.com. She needs a website design package and 2 logo designs."
+                            </button>
+                            <button class="btn btn-outline btn-small example-prompt">
+                                "Rahul Sharma needs 3 social media campaigns and SEO optimization. His email is rahul@example.com."
+                            </button>
+                            <button class="btn btn-outline btn-small example-prompt">
+                                "Generate an invoice for Priya Mehta, priya@example.com. She needs one mobile app development project and UI/UX design. Apply a 10% discount."
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="extractionView" class="view">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Smart Extraction</h3>
+                        <span class="badge badge-info" id="extractionSource">Smart local extraction</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="extraction-section">
+                            <h4>Customer</h4>
+                            <div class="extraction-field">
+                                <label>Name:</label>
+                                <span id="extractedName">-</span>
+                            </div>
+                            <div class="extraction-field">
+                                <label>Email:</label>
+                                <span id="extractedEmail">-</span>
+                            </div>
+                            <div class="extraction-field">
+                                <label>Phone:</label>
+                                <span id="extractedPhone">-</span>
+                            </div>
+                        </div>
+
+                        <div class="extraction-section">
+                            <h4>Detected Services</h4>
+                            <div id="extractedServices"></div>
+                        </div>
+
+                        <div id="unmatchedSection" class="extraction-section" style="display: none;">
+                            <h4 class="warning">Unmatched Services</h4>
+                            <div id="unmatchedServices"></div>
+                        </div>
+
+                        <div class="extraction-actions">
+                            <button class="btn btn-secondary" id="backBtn">Back</button>
+                            <button class="btn btn-primary" id="proceedToReviewBtn">Proceed to Review</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="reviewView" class="view">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Invoice Review</h3>
+                        <span class="badge badge-warning" id="reviewStatus">DRAFT</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="review-section">
+                            <h4>Customer</h4>
+                            <div class="review-field">
+                                <label>Name:</label>
+                                <input type="text" id="reviewName" class="form-input">
+                            </div>
+                            <div class="review-field">
+                                <label>Email:</label>
+                                <input type="email" id="reviewEmail" class="form-input">
+                            </div>
+                            <div class="review-field">
+                                <label>Phone:</label>
+                                <input type="text" id="reviewPhone" class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="review-section">
+                            <h4>Items</h4>
+                            <div id="reviewItems"></div>
+                            <button class="btn btn-outline btn-small" id="addItemBtn">+ Add Item</button>
+                        </div>
+
+                        <div class="review-totals">
+                            <div class="total-row">
+                                <span>Subtotal:</span>
+                                <span id="reviewSubtotal">INR 0.00</span>
+                            </div>
+                            <div class="total-row">
+                                <span>Discount:</span>
+                                <input type="number" id="reviewDiscount" class="form-input-small" value="0">
+                            </div>
+                            <div class="total-row">
+                                <
