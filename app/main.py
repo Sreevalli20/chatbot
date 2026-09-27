@@ -3,9 +3,12 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 from fastapi import Request
-import os
+from pathlib import Path
 from app.api.routes import router
 
+
+# Get the project root directory (app/main.py -> project root)
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 app = FastAPI(
     title="InvoiceAI",
@@ -16,9 +19,9 @@ app = FastAPI(
 # Include API routes
 app.include_router(router)
 
-# Mount static files and templates
-app.mount("/static", StaticFiles(directory="templates/static"), name="static")
-templates = Jinja2Templates(directory="templates")
+# Mount static files and templates with absolute paths
+app.mount("/static", StaticFiles(directory=str(BASE_DIR / "templates" / "static")), name="static")
+templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
 
 @app.get("/", response_class=HTMLResponse)
